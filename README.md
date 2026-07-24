@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+#loading{
+width:90%;
+max-width:450px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.progress{
+width:100%;
+height:18px;
+background:#333;
+border-radius:30px;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#ff0080,#ff4da6,#ff66cc);
+transition:.05s;
+}
+
+#percent{
+margin-top:15px;
+font-size:20px;
+}
+
+.hidden{
+display:none;
+}
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:15px;
+font-size:18px;
+cursor:pointer;
+transition:.2s;
+}
+
+#yes{
+background:#ff2d55;
+color:white;
+}
+
+#no{
+background:#444;
+color:white;
+position:fixed;
+}
+
+img{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:50%;
+border:6px solid white;
+box-shadow:0 0 30px pink;
+}
+
+.heart{
+position:fixed;
+font-size:30px;
+pointer-events:none;
+animation:naik linear infinite;
+}
+
+@keyframes naik{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:1;
+}
+
+}
+
+@keyframes pulse{
+
+from{
+transform:scale(1);
+}
+
+to{
+transform:scale(1.08);
+}
+
+}
+
+#love h1{
+animation:pulse 1s infinite alternate;
+font-size:55px;
+}
+
+#typing{
+font-size:22px;
+margin-top:25px;
+line-height:35px;
+padding:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="loading">
+
+<h1 id="status">
+SABAR SAYANG
+</h1>
+
+<div class="progress">
+
+<div class="bar" id="bar"></div>
+
+</div>
+
+<div id="percent">0%</div>
+
+</div>
+
+<script>
+
+const bar = document.getElementById("bar");
+const status = document.getElementById("status");
+const percent = document.getElementById("percent");
+
+let p=0;
+
+const timer=setInterval(()=>{
+
+p++;
+
+bar.style.width=p+"%";
+
+percent.innerHTML=p+"%";
+
+if(p==25){
+status.innerHTML="Memeriksa Data...";
+}
+
+if(p==50){
+status.innerHTML="Mencari Orang Tercantik...";
+}
+
+if(p==75){
+status.innerHTML="Ditemukan ❤️";
+}
+
+if(p>=100){
+
+clearInterval(timer);
+
+showQuestion();
+
+}
+
+},40);
+
+function showQuestion(){
+
+document.body.style.background="#000000";
+
+document.body.innerHTML=`
+
+<h1 style="color:#ff2d55;margin-top:70px;">
+SAYANG AKU GA? 🥺❤️
+</h1>
+
+<p style="margin-top:15px;font-size:22px;">
+Jawab yang jujur yang 
+</p>
+
+<div style="margin-top:80px;">
+
+<button id="yes">
+Sayang ❤️
+</button>
+
+<button id="no">
+tidak
+</button>
+
+</div>
+
+`;
+
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+
+// Posisi awal tombol "Ga"
+no.style.left="60%";
+no.style.top="60%";
+
+// Fungsi tombol kabur
+function kabur(){
+
+let maxX=window.innerWidth-no.offsetWidth;
+let maxY=window.innerHeight-no.offsetHeight;
+
+let x=Math.random()*maxX;
+let y=Math.random()*maxY;
+
+no.style.left=x+"px";
+no.style.top=y+"px";
+
+}
+
+// PC
+no.addEventListener("mouseenter",kabur);
+
+// HP Android
+no.addEventListener("touchstart",function(e){
+
+e.preventDefault();
+
+kabur();
+
+},{passive:false});
+
+// Kalau tetap berhasil ditekan
+no.addEventListener("click",function(e){
+
+e.preventDefault();
+
+kabur();
+
+});
+
+// Tombol Sayang
+yes.onclick=function(){
+
+if(navigator.vibrate){
+navigator.vibrate([200,100,200,100,300]);
+}
+
+document.body.innerHTML=`
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(135deg,#ff9ec4,#ff2d55);
+overflow:hidden;
+font-family:Arial;
+color:white;
+text-align:center;
+}
+
+img{
+width:230px;
+height:230px;
+object-fit:cover;
+border-radius:50%;
+border:6px solid white;
+box-shadow:0 0 30px white;
+animation:zoom 1s;
+}
+
+h1{
+font-size:55px;
+animation:pulse 1s infinite alternate;
+margin-top:20px;
+}
+
+#typing{
+width:90%;
+max-width:500px;
+font-size:22px;
+line-height:35px;
+margin-top:20px;
+padding:10px;
+}
+
+button{
+margin-top:30px;
+padding:15px 30px;
+border:none;
+border-radius:15px;
+font-size:18px;
+cursor:pointer;
+background:white;
+color:#ff2d55;
+font-weight:bold;
+}
+
+.heart{
+position:fixed;
+pointer-events:none;
+animation:fall linear infinite;
+}
+
+.confetti{
+position:fixed;
+pointer-events:none;
+animation:confetti linear forwards;
+}
+
+@keyframes pulse{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
+@keyframes zoom{
+from{transform:scale(.3);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fall{
+0%{
+transform:translateY(110vh);
+opacity:0;
+}
+100%{
+transform:translateY(-120vh);
+opacity:1;
+}
+}
+
+@keyframes confetti{
+0%{
+transform:translateY(-50px) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(120vh) rotate(720deg);
+opacity:0;
+}
+}
+
+</style>
+
+<img src="1000416157.jpg">
+
+<h1>❤️ LOVE YOU SAYANG ❤️</h1>
+
+<div id="typing"></div>
+
+<button id="hug">🤗 Peluk Virtual</button>
+
+`;
+
+const kata="Makasih yaa udah hadir di hidup aku. ❤️ Semoga kita selalu bersama, saling menjaga, saling percaya, dan langgeng sampai kapan pun. I LOVE YOU SO MUCH 🥰";
+
+let i=0;
+
+const ngetik=setInterval(()=>{
+
+typing.innerHTML+=kata.charAt(i);
+
+i++;
+
+if(i>=kata.length){
+clearInterval(ngetik);
+}
+
+},45);
+
+// hati
+for(let x=0;x<70;x++){
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML=["❤️","💕","💖","💗"][Math.floor(Math.random()*4)];
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(20+Math.random()*30)+"px";
+
+h.style.animationDuration=(3+Math.random()*5)+"s";
+
+h.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(h);
+
+}
+
+// confetti
+for(let x=0;x<120;x++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.innerHTML=["🎉","✨","💖"][Math.floor(Math.random()*3)];
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.fontSize=(15+Math.random()*20)+"px";
+
+c.style.animationDuration=(2+Math.random()*2)+"s";
+
+document.body.appendChild(c);
+
+}
+
+// tombol peluk
+document.getElementById("hug").onclick=function(){
+
+alert("🤗 Peluk Virtual Terkirim!\n\nLove You Sayang ❤️aku masih nyari cara buat nambahin foto️");
+
+};
+
+}; // akhir yes.onclick
+
+} // akhir showQuestion
+</script>
+</body>
+</html>
